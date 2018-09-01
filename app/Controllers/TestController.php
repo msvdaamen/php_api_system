@@ -9,11 +9,12 @@
 namespace App\Controllers;
 
 
+use App\router\Request;
 use App\router\Response;
 
 class TestController extends Controller
 {
-    public function test() {
-        return Response::response('test', 200);
+    public function test(Request $request) {
+        return Response::response($request, 200);
     }
 }
