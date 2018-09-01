@@ -10,7 +10,7 @@ namespace App\router;
 
 use App\router;
 
-class routerHandle
+class RouterHandle
 {
     private $url;
     private $class;
@@ -18,8 +18,7 @@ class routerHandle
     private $request;
 
 
-    public function __construct(string $url, string $controller, string $type)
-    {
+    public function __construct(string $url, string $controller, string $type) {
         $type === 'GET' ? $this->url = $this->parseUrl($url) : $this->url = $url;
         $this->request = new Request($type, $this->getUrlValues($url));
         $splitted = explode('@', $controller);
@@ -33,7 +32,7 @@ class routerHandle
     }
 
     public function handle() {
-        if(method_exists( $this->class, $this->function)) {
+        if(method_exists($this->class, $this->function)) {
             echo $this->class->{$this->function}($this->request);
         }else {
             echo Response::response(['error' => 'function does not exist on ' . get_class($this->class)], 500);

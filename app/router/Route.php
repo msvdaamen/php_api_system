@@ -18,19 +18,19 @@ class Route
     private static $deleteRoutes = [];
 
     public static function get(string $url, string $controller) {
-        array_push(self::$getRoutes, new routerHandle($url, $controller, 'GET'));
+        array_push(self::$getRoutes, new RouterHandle($url, $controller, 'GET'));
     }
 
     public static function post(string $url, string $controller) {
-        array_push(self::$postRoutes, new routerHandle($url, $controller, 'POST'));
+        array_push(self::$postRoutes, new RouterHandle($url, $controller, 'POST'));
     }
 
     public static function put(string $url, string $controller) {
-        array_push(self::$postRoutes, new routerHandle($url, $controller, 'PUT'));
+        array_push(self::$putRoutes, new RouterHandle($url, $controller, 'PUT'));
     }
 
     public static function delete(string $url, string $controller) {
-        array_push(self::$postRoutes, new routerHandle($url, $controller,'DELETE'));
+        array_push(self::$deleteRoutes, new RouterHandle($url, $controller,'DELETE'));
     }
 
     public function init() {

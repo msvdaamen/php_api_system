@@ -19,11 +19,12 @@ class Request
 
     public function __get($varName){
 
-        if (!array_key_exists($varName,$this->data)){
-            //this attribute is not defined!
-
+        if($this->data) {
+            if (!array_key_exists($varName,$this->data)){
+                //this attribute is not defined!
+            }
+            else return $this->data[$varName];
         }
-        else return $this->data[$varName];
     }
 
     public function __construct(string $type, array $data = null)
@@ -35,6 +36,12 @@ class Request
             } case 'POST' : {
                 $this->data = $_POST;
                 break;
+            }case 'PUT' : {
+                parse_str(file_get_contents("php://input"),$this->data);
+                break;
+            }case 'DELETE' : {
+            $this->data = $data;
+            break;
             }
         }
     }
