@@ -10,4 +10,4 @@ use App\Router\Route;
 
 Route::get('/api/test', 'TestController@test');
 Route::post('/api/test', 'TestController@test');
-Route::put('/api/test', 'TestController@test');
+//Route::put('/api/test', 'TestController@test');

@@ -6,11 +6,18 @@
  * Time: 15:01
  */
 
-namespace App\router;
+namespace App\Router;
 
 
 class Response
 {
+    /**
+     * returns an json response
+     *
+     * @param $data
+     * @param int $code
+     * @return string
+     */
     public static function response($data, int $code)
     {
         http_response_code($code);

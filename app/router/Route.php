@@ -17,22 +17,49 @@ class Route
     private static $putRoutes = [];
     private static $deleteRoutes = [];
 
+    /**
+     * adds a get request to the api
+     *
+     * @param string $url
+     * @param string $controller
+     */
     public static function get(string $url, string $controller) {
         array_push(self::$getRoutes, new RouterHandle($url, $controller, 'GET'));
     }
 
+    /**
+     * adds a post request to the api
+     *
+     * @param string $url
+     * @param string $controller
+     */
     public static function post(string $url, string $controller) {
         array_push(self::$postRoutes, new RouterHandle($url, $controller, 'POST'));
     }
 
-    public static function put(string $url, string $controller) {
-        array_push(self::$putRoutes, new RouterHandle($url, $controller, 'PUT'));
-    }
+    /**
+     * adds a put request to the api
+     *
+     * @param string $url
+     * @param string $controller
+     */
+//    public static function put(string $url, string $controller) {
+//        array_push(self::$putRoutes, new RouterHandle($url, $controller, 'PUT'));
+//    }
 
-    public static function delete(string $url, string $controller) {
-        array_push(self::$deleteRoutes, new RouterHandle($url, $controller,'DELETE'));
-    }
+    /**
+     * adds a delete request to the api
+     *
+     * @param string $url
+     * @param string $controller
+     */
+//    public static function delete(string $url, string $controller) {
+//        array_push(self::$deleteRoutes, new RouterHandle($url, $controller,'DELETE'));
+//    }
 
+    /**
+     * handles the incoming request from a client
+     */
     public function init() {
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET' : {
@@ -57,6 +84,12 @@ class Route
         }
     }
 
+
+    /**
+     * looks if the request exists and then executes
+     *
+     * @param array $array
+     */
     private function handleRequest(array $array) {
         $executed = false;
         foreach ($array as $request) {
@@ -72,6 +105,12 @@ class Route
         }
     }
 
+    /**
+     * checks if the url that is requested valid is
+     *
+     * @param $url
+     * @return bool
+     */
     private function checkUrl($url): bool {
         $splittedUrl = explode('/', $url);
         $splittedServerUrl = explode('/', $_SERVER['REQUEST_URI']);

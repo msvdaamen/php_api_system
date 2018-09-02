@@ -15,6 +15,6 @@ use App\router\Response;
 class TestController extends Controller
 {
     public function test(Request $request) {
-            return Response::response($request, 200);
+            return Response::response(['data' => 'test'], 200);
     }
 }

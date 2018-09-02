@@ -6,7 +6,7 @@
  * Time: 17:36
  */
 
-namespace App\exeptions;
+namespace App\Exeptions;
 
 
 use App\router\Response;
@@ -19,6 +19,5 @@ class ServerExeption extends Exception
    {
        parent::__construct($message, $code, $previous);
        echo Response::response(['error' => $message], 500);
-       die();
    }
 }

@@ -8,8 +8,6 @@
 
 namespace App\router;
 
-use App\router;
-
 class RouterHandle
 {
     private $url;
@@ -18,6 +16,12 @@ class RouterHandle
     private $request;
 
 
+    /**
+     * RouterHandle constructor.
+     * @param string $url
+     * @param string $controller
+     * @param string $type
+     */
     public function __construct(string $url, string $controller, string $type) {
         $type === 'GET' ? $this->url = $this->parseUrl($url) : $this->url = $url;
         $this->request = new Request($type, $this->getUrlValues($url));
@@ -27,10 +31,18 @@ class RouterHandle
         $this->function = $splitted[1];
     }
 
+    /**
+     * return the url
+     *
+     * @return string
+     */
     public function getUrl(): string {
         return $this->url;
     }
 
+    /**
+     * executes the given controller function
+     */
     public function handle() {
         if(method_exists($this->class, $this->function)) {
             echo $this->class->{$this->function}($this->request);
@@ -39,6 +51,12 @@ class RouterHandle
         }
     }
 
+    /**
+     * checks if there are params in the get request and reconstructs the url if there are params
+     *
+     * @param $url
+     * @return string
+     */
     private function parseUrl($url): string {
         $splittedUrl = explode('/', $url);
         $newUrl = '';
@@ -54,6 +72,12 @@ class RouterHandle
         return $newUrl;
     }
 
+    /**
+     * gets the url values so they can be uses in the request object
+     *
+     * @param $url
+     * @return array
+     */
     private function getUrlValues($url): array {
         $data = [];
         $splittedUrl = explode('/', $url);
